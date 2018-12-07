@@ -1,0 +1,43 @@
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+  background: #2e2e2e;
+  color: #ddd;
+}
+
+.drop-zone {
+  border: dashed 3px #555;
+  position: relative;
+  height: calc(100vh - 40px);
+  margin: 20px 0;
+  transition: all 1s ease;
+}
+
+.drop-zone.inactive {
+  height: auto;
+  border-color: transparent;
+}
+
+.drop-zone.is-active {
+  border-color: #005e9c;
+  height: calc(100vh - 40px);
+  background: radial-gradient(#555, transparent);
+}
+
+.drop-message {
+  text-align: center;
+  display: none;
+  position: absolute;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 150%;
+  transition: all 1s ease;
+}
+
+.drop-zone.is-active .drop-message {
+  transform: translate(-50%, -50%) scale(1.2);
+}
