@@ -35,10 +35,24 @@ const actions = store => ({
       store.setState({ messages: _.flatten(results) });
     });
   },
+  extractWords(state) {
+    console.log("Processing Words");
+    const messages = [];
+    state.zip.folder("messages/inbox").forEach((relativePath, file) => {
+      if (!file.dir) {
+        messages.push(
+          file.async("text").then(result => JSON.parse(result).messages)
+        );
+      }
+    });
+    Promise.all(messages).then(results => {
+      store.setState({ words: _.flatten(results) });
+    });
+  },
   extractReactions(state) {
     console.log("Processing Reactions");
     const reactions = [];
-    state.zip.folder("reactions/").forEach((relativePath, file) => {
+    state.zip.folder("likes_and_reactions/").forEach((relativePath, file) => {
       if (!file.dir) {
         reactions.push(
           file.async("text").then(result => JSON.parse(result).reactions)
