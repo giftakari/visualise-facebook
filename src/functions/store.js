@@ -52,16 +52,12 @@ const actions = store => ({
   extractReactions(state) {
     console.log("Processing Reactions");
     const reactions = [];
-    state.zip.folder("likes_and_reactions/").forEach((relativePath, file) => {
-      if (!file.dir) {
-        reactions.push(
-          file.async("text").then(result => JSON.parse(result).reactions)
-        );
-      }
-    });
-    Promise.all(reactions).then(results => {
-      store.setState({ reactions: _.flatten(results) });
-    });
+    state.zip
+    .file("likes_and_reactions/posts_and_comments.json")
+    .async("text")
+    .then(json => {
+      store.setState({ reactions: JSON.parse(json).reactions });
+    })
   }
 });
 

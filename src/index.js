@@ -7,7 +7,6 @@ import { store } from "./functions/store";
 import DropMessage from "./components/drop-message";
 import ChartFriends from "./components/chart-friends";
 import ChartMessages from "./components/chart-messages";
-import ChartWords from "./components/chart-words";
 import ChartReactions from "./components/chart-reactions";
 
 import Chart from "chart.js";
@@ -25,7 +24,6 @@ class App extends Component {
                 <ChartFriends />
                 <ChartMessages />
                 <ChartReactions />
-                <ChartWords />
               </DropZone>
             </div>
           </div>
