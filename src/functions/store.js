@@ -7,6 +7,8 @@ const store = createStore({
   messages: false
 });
 
+const isJSON = (name) => name.substring(name.lastIndexOf('.')+1, name.length) === "json";
+
 const actions = store => ({
   dropData(state, zip) {
     console.log("Dropped data");
@@ -25,7 +27,7 @@ const actions = store => ({
     console.log("Processing Messages");
     const messages = [];
     state.zip.folder("messages/inbox").forEach((relativePath, file) => {
-      if (!file.dir) {
+      if (!file.dir && isJSON(file.name)) {
         messages.push(
           file.async("text").then(result => JSON.parse(result).messages)
         );
@@ -39,7 +41,8 @@ const actions = store => ({
     console.log("Processing Words");
     const messages = [];
     state.zip.folder("messages/inbox").forEach((relativePath, file) => {
-      if (!file.dir) {
+      console.log('f2', file);
+      if (!file.dir && isJSON(file.name)) {
         messages.push(
           file.async("text").then(result => JSON.parse(result).messages)
         );
