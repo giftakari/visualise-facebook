@@ -86,7 +86,10 @@ export const processReactionData = (data, f) => {
   const formatTime = t => format(t, labelFormat);
 
   const reactions = _.groupBy(data, d => {
-    return d.data[0].reaction.reaction;
+    if (d.data) {
+      return d.data[0].reaction.reaction;
+    }
+    return d;
   });
 
   console.log(reactions);
