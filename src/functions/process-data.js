@@ -89,6 +89,8 @@ export const processReactionData = (data, f) => {
     return d.data[0].reaction.reaction;
   });
 
+  console.log(reactions);
+
   const datasets = _.map(reactions, (reaction, label) => {
     const grouped = _.groupBy(reaction, d => {
       return formatTime(parseTime(d.timestamp));
@@ -101,6 +103,8 @@ export const processReactionData = (data, f) => {
 
     return { label, data: sorted };
   });
+
+  console.log(datasets);
 
   return datasets;
 };
