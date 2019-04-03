@@ -54,14 +54,12 @@ export const processMessagesData = (data, f) => {
   return sorted;
 };
 
-
 export const processWordData = (data, f) => {
-  
   const words = _.map(data, (value, key) => {
-    return data[0].content.split(" ")
+    return data[0].content.split(" ");
   });
-  
-  const flatted = _.flatten(words)
+
+  const flatted = _.flatten(words);
 
   const grouped = _.groupBy(flatted, d => {
     return d;
@@ -74,8 +72,8 @@ export const processWordData = (data, f) => {
   return mapped;
 };
 
-
 export const processReactionData = (data, f) => {
+  console.log(data);
   const formatOptions = {
     day: "dd/MM/yyyy",
     month: "MM/yyyy",
