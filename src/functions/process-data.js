@@ -38,19 +38,18 @@ export const processMessagesData = (data, f) => {
   const labelFormat = formatOptions[f];
 
   const parseLabel = t => parse(t, labelFormat, new Date());
-  const parseTime = t => parse(t, "t", new Date());
+  const parseTime = t => parse(t, "T", new Date());
   const formatTime = t => format(t, labelFormat);
 
   const grouped = _.groupBy(data, d => {
-    return formatTime(parseTime(d.timestamp));
+    return formatTime(parseTime(d.timestamp_ms));
   });
 
   const mapped = _.map(grouped, (value, key) => {
     return { label: key, value: value.length };
   });
 
-  const sorted = _.sortBy(mapped, d => parseLabel(d));
-
+  const sorted = _.sortBy(mapped, d => parseLabel(d.label));
   return sorted;
 };
 
